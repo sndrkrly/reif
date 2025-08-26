@@ -30,11 +30,16 @@ set(IMGUI_SOURCES
     vendor/imgui/backends/imgui_impl_glfw.cpp
 )
 
+file(GLOB_RECURSE SRC_FILES
+    src/*.cpp
+    src/**/*.cpp
+)
+
 add_library(glm::glm INTERFACE IMPORTED)
 target_include_directories(glm::glm INTERFACE "${MSYS2_PREFIX}/include")
 
 add_executable(reif
-    src/main.cpp
+    ${SRC_FILES}
     ${IMGUI_SOURCES}
 )
 
