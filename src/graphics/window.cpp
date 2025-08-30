@@ -35,14 +35,6 @@ void window::create(const char* name, int width, int height) {
 
     std::cout << "opengl init\nversion: " << glGetString(GL_VERSION) << std::endl;
 
-    FT_Library ft;
-    if (FT_Init_FreeType(&ft)) {
-        std::cerr << "couldn't init freetype!\n";
-    } else {
-        std::cout << "freetype init\n";
-        FT_Done_FreeType(ft);
-    }
-
     int fb_width = 0, fb_height = 0;
     glfwGetFramebufferSize(_window, &fb_width, &fb_height);
     glViewport(0, 0, fb_width, fb_height);
