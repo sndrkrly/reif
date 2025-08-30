@@ -37,6 +37,10 @@ font::font() : _ft(nullptr), _face(nullptr), _vao(0), _vbo(0), _shader(0) {
 }
 
 font::~font() {
+    cleanup();
+}
+
+void font::cleanup() {
     if (_vao != 0) {
         glDeleteVertexArrays(1, &_vao);
         _vao = 0;
@@ -91,16 +95,16 @@ bool font::load(const std::string& path, unsigned int pixel_size) {
         
         switch (error) {
             case FT_Err_Unknown_File_Format:
-                std::cerr << "The font file format is unsupported or corrupted." << std::endl;
+                std::cerr << "the font file format is unsupported or corrupted." << std::endl;
                 break;
             case FT_Err_Cannot_Open_Resource:
-                std::cerr << "Cannot open the font file (permission or path issue)." << std::endl;
+                std::cerr << "cannot open the font file (permission or path issue)." << std::endl;
                 break;
             case FT_Err_Invalid_File_Format:
-                std::cerr << "Invalid font file format." << std::endl;
+                std::cerr << "invalid font file format." << std::endl;
                 break;
             default:
-                std::cerr << "Unknown FreeType error occurred." << std::endl;
+                std::cerr << "unknown FreeType error occurred." << std::endl;
                 break;
         }
 
@@ -152,7 +156,7 @@ bool font::load(const std::string& path, unsigned int pixel_size) {
     FT_Done_Face(_face);
     _face = nullptr;
 
-    _shader = font::create_shader();
+    _shader = create_shader();
     if (_shader == 0) {
         std::cerr << "failed to create shader";
         return false;
@@ -161,7 +165,7 @@ bool font::load(const std::string& path, unsigned int pixel_size) {
     _projectionLoc = glGetUniformLocation(_shader, "projection");
     _textColorLoc = glGetUniformLocation(_shader, "textColor");
     
-    font::setup_render();
+    setup_render();
     
     std::cout << "font loaded successfully: " << path << " (size: " << pixel_size << ")" << std::endl;
     return true;

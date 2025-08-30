@@ -40,6 +40,8 @@ class font {
     public:
         font();
         ~font();
+        
+        void cleanup();
 
         bool load(const std::string& path, unsigned int pixel_size);
         void render_text(const std::string& text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);

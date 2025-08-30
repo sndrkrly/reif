@@ -40,7 +40,7 @@ void window::create(const char* name, int width, int height) {
     glViewport(0, 0, fb_width, fb_height);
 }
 
-void window::destroy() {
+void window::cleanup() {
     if (_window) {
         glfwDestroyWindow(_window);
         _window = nullptr;

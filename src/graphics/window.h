@@ -10,7 +10,7 @@ class window {
 
     public:
         void create(const char* name, int width, int height);
-        void destroy();
+        void cleanup();
 
         void poll_events();
         void swap_buffers();
